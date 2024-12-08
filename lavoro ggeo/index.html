@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eruzione Vulcanica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle, #000 60%, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .eruption {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: lift 6s ease-in-out forwards;
+      z-index: 10;
+    }
+
+    .cloud-layer {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      filter: blur(50px);
+      animation: cloud-move 6s ease-in-out forwards;
+    }
+
+    .cloud-layer.large {
+      width: 80vmin;
+      height: 50vmin;
+      top: -50vmin;
+      background: radial-gradient(circle, rgba(255, 100, 0, 0.7), rgba(200, 80, 0, 0.6), rgba(150, 50, 0, 0.5));
+      animation-delay: 2.5s;
+    }
+
+    .cloud-layer.medium {
+      width: 60vmin;
+      height: 35vmin;
+      top: -55vmin;
+      background: radial-gradient(circle, rgba(255, 120, 0, 0.6), rgba(180, 90, 0, 0.5), rgba(140, 70, 0, 0.4));
+      animation-delay: 3s;
+    }
+
+    .cloud-layer.small {
+      width: 50vmin;
+      height: 30vmin;
+      top: -60vmin;
+      background: radial-gradient(circle, rgba(255, 150, 0, 0.5), rgba(170, 100, 0, 0.4), rgba(120, 80, 0, 0.3));
+      animation-delay: 3.5s;
+    }
+
+    .smoke {
+      position: absolute;
+      width: 100vmin;
+      height: 100vmin;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(150, 150, 255, 0.6), rgba(100, 100, 255, 0.7));
+      filter: blur(120px);
+      border-radius: 50%;
+      animation: smoke-move 6s ease-in-out forwards, smoke-color 15s infinite;
+      top: -30vmin;
+      z-index: 5;
+    }
+
+    @keyframes cloud-move {
+      0% {
+        transform: scale(0) translateY(200px);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.6) translateY(-150px);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5) translateY(-500px);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes lift {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes smoke-move {
+      0% {
+        transform: scale(0) translateY(200px);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1.6) translateY(-150px);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5) translateY(-500px);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes smoke-color {
+      0% {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(150, 150, 255, 0.6), rgba(100, 100, 255, 0.7));
+      }
+      25% {
+        background: radial-gradient(circle, rgba(180, 130, 255, 0.5), rgba(150, 100, 255, 0.6), rgba(120, 70, 255, 0.8));
+      }
+      50% {
+        background: radial-gradient(circle, rgba(150, 100, 255, 0.4), rgba(120, 80, 255, 0.6), rgba(90, 60, 255, 0.8));
+      }
+      75% {
+        background: radial-gradient(circle, rgba(130, 70, 255, 0.5), rgba(100, 40, 255, 0.7), rgba(80, 30, 255, 0.9));
+      }
+      100% {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(150, 150, 255, 0.6), rgba(100, 100, 255, 0.7));
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="background-audio" preload="auto">
+    <source src="audio/imagiro Wool Gloves.mp3" type="audio/mp3">
+    Il tuo browser non supporta il tag audio.
+  </audio>
+
+  <div class="eruption">
+    <div class="smoke"></div>
+    <div class="cloud-layer large"></div>
+    <div class="cloud-layer medium"></div>
+    <div class="cloud-layer small"></div>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Tab") {
+        let audio = document.getElementById('background-audio');
+        audio.play().catch((error) => {
+          console.log("Errore nell'avvio dell'audio:", error);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

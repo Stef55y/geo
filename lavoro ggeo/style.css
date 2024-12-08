@@ -1,0 +1,161 @@
+/* Impostazioni generali */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle, #000 60%, #1a1a1a);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+/* Contenitore dell'esplosione */
+.explosion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: lift 6s ease-in-out forwards;
+}
+
+/* Gambo dell'esplosione - torre nucleare stilizzata */
+.stem {
+  width: 160px;
+  height: 650px;
+  background: linear-gradient(to top, rgba(255, 180, 0, 1), rgba(200, 70, 0, 0.7), rgba(50, 20, 0, 0.5));
+  border-radius: 30% 30% 50% 50%;
+  filter: blur(10px);
+  position: relative;
+  animation: stem-grow 3s ease-in-out forwards;
+  z-index: 10;
+}
+
+/* Nuvole espansive */
+.cloud-layer {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(40px);
+  animation: cloud-move 6s ease-in-out forwards;
+}
+
+.cloud-layer.large {
+  width: 1400px;
+  height: 900px;
+  top: -800px;
+  background: radial-gradient(circle, rgba(255, 120, 0, 0.8), rgba(200, 90, 0, 0.6), rgba(150, 50, 0, 0.4));
+  animation-delay: 1s;
+}
+
+.cloud-layer.medium {
+  width: 1000px;
+  height: 700px;
+  top: -850px;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.7), rgba(180, 100, 0, 0.5), rgba(130, 70, 0, 0.4));
+  animation-delay: 1.8s;
+}
+
+.cloud-layer.small {
+  width: 800px;
+  height: 500px;
+  top: -900px;
+  background: radial-gradient(circle, rgba(255, 180, 0, 0.5), rgba(180, 130, 0, 0.3), rgba(120, 80, 0, 0.2));
+  animation-delay: 2.5s;
+}
+
+/* Fumo denso che cambia colore */
+.smoke {
+  position: absolute;
+  width: 1600px;
+  height: 1600px;
+  background: radial-gradient(circle, rgba(200, 200, 255, 0.6), rgba(150, 150, 255, 0.7), rgba(100, 100, 255, 0.9));
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: smoke-move 8s ease-in-out forwards, smoke-color 15s infinite;
+  top: -600px;
+  z-index: 5;
+}
+
+/* Animazione gambo */
+@keyframes stem-grow {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 500px;
+    opacity: 0.8;
+  }
+  100% {
+    height: 650px;
+    opacity: 1;
+  }
+}
+
+/* Movimento delle nuvole */
+@keyframes cloud-move {
+  0% {
+    transform: scale(0) translateY(200px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5) translateY(-30px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2) translateY(-300px);
+    opacity: 0.5;
+  }
+}
+
+/* Sollevamento globale dell'esplosione */
+@keyframes lift {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animazione del fumo */
+@keyframes smoke-move {
+  0% {
+    transform: scale(0) translateY(200px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.6) translateY(-150px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5) translateY(-500px);
+    opacity: 0.6;
+  }
+}
+
+/* Cambiamento del colore del fumo (azzurro a viola) */
+@keyframes smoke-color {
+  0% {
+    background: radial-gradient(circle, rgba(200, 200, 255, 0.6), rgba(150, 150, 255, 0.7), rgba(100, 100, 255, 0.9));
+  }
+  25% {
+    background: radial-gradient(circle, rgba(180, 130, 255, 0.5), rgba(150, 100, 255, 0.6), rgba(120, 70, 255, 0.8));
+  }
+  50% {
+    background: radial-gradient(circle, rgba(150, 100, 255, 0.4), rgba(120, 80, 255, 0.6), rgba(90, 60, 255, 0.8));
+  }
+  75% {
+    background: radial-gradient(circle, rgba(130, 70, 255, 0.5), rgba(100, 40, 255, 0.7), rgba(80, 30, 255, 0.9));
+  }
+  100% {
+    background: radial-gradient(circle, rgba(200, 200, 255, 0.6), rgba(150, 150, 255, 0.7), rgba(100, 100, 255, 0.9));
+  }
+}
